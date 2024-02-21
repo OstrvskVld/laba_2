@@ -1,7 +1,10 @@
 #ifndef LAB_2_PERSONAL_H
 #define LAB_2_PERSONAL_H
 #include <iostream>
+#include <string>
+
 using namespace std;
+
 class Personal{
 private:
     string name;
@@ -11,17 +14,35 @@ private:
     bool femaleMale;
 public:
     Personal(){};
+    Personal(string name){
+        this->name = name;
+    };
+    Personal(string name, string placeOfBirth){
+        this->name = name;
+        this-> placeOfBirth = placeOfBirth;
+    }
+    Personal(string name, string placeOfBirth, double dataOfBirth){
+        this->name = name;
+        this-> placeOfBirth = placeOfBirth;
+        this->dataOfBirth = dataOfBirth;
+    }
+    Personal(string name, string placeOfBirth, double dataOfBirth, double salary){
+        this->name = name;
+        this-> placeOfBirth = placeOfBirth;
+        this->dataOfBirth = dataOfBirth;
+        this->salary = salary;
+    }
     Personal(string name, string placeOfBirth, double dataOfBirth, double salary, bool femaleMale);
     string person (){
         string str;
-        str = "Name: " + name + "\t" "Place of birth:" + placeOfBirth + "\t" + "Data of birth: " + to_string(dataOfBirth)
-                +"\t" + "Salary:" + to_string(salary) + "\t";
+        str = "Name: " + name + "\t" "Place of birth:" + "\t" + placeOfBirth + "\t" + "Data of birth: " + to_string(dataOfBirth)
+                +"\t" + "Salary:" + "\t" + to_string(salary) + "\t";
         switch(femaleMale) {
             case 0:
                 str = str + "Male" + "\t";
                 break;
             case 1:
-                str = str + "Female:" + "\t";
+                str = str + "Female" + "\t";
                 break;
         }
         cout << "\n" << "Constructor is here." << endl;

@@ -1,62 +1,59 @@
 #ifndef LAB_2_CLIENTS_H
 #define LAB_2_CLIENTS_H
 #include <iostream>
+#include <string>
+
 using namespace std;
-class Clients{
+
+class Clients {
 private:
     string name;
     int age;
-    bool buyOfCar, credit;
+    bool buyOfCar;
+    bool credit;
+    string carmake;
+
 public:
-    Clients(){};
-    Clients(string name, int age,bool buyOfCar,bool credit);
-    string carMake (){
-        string str;
-        str = "Name: " + name + "\t" + "Age: " + to_string(age) + "\t";
-        switch(buyOfCar) {
-            case 0:
-                str = str + "was not purchased" + "\t";
-                break;
-            case 1:
-                str = str + "it was bought:" + "\t";
-                break;
-        }
-
-
-        switch(credit) {
-            case 0:
-                str = str + "Credit: Yes" + "\t";
-                break;
-            case 1:
-                str = str + "Credit: No" + "\t";
-                break;
-        }
-
-
-        cout << "\n" << "Constructor is here." << endl;
-        return str;
-
-    };
-
-    void init(string name, int age, bool buyOfCar, bool credit)
-    {
-        this-> name = name;
+    Clients() : name(""), age(0), buyOfCar(false), credit(false), carmake("") {}
+    Clients(string name, int age, bool buyOfCar, bool credit, string carMake) {
+        this->name = name;
         this->age = age;
         this->buyOfCar = buyOfCar;
         this->credit = credit;
+        this->carmake = carmake;
+    }
+
+    string carMake() {
+        string str = "Name: " + name + "\t" + "Age: " + to_string(age) + "\t";
+
+        if (buyOfCar) {
+            str += "Car purchased: ";
+            if (carmake.empty()) {
+                cout << "Enter car make: ";
+                getline(cin, carmake);
+            }
+            str += carmake + "\t";
+        } else {
+            str += "No car purchased\t";
+        }
+
+        str += "Credit: ";
+        str += credit ? "Yes" : "No";
+
+        return str;
+    }
+
+    void init(string name, int age, bool buyOfCar, bool credit, string carMake) {
+        this->name = name;
+        this->age = age;
+        this->buyOfCar = buyOfCar;
+        this->credit = credit;
+        this->carmake = carmake;
     }
 
     ~Clients() {
         cout << "Destructor is here." << endl;
     }
 };
-Clients::Clients(string name, int age, bool buyOfCar, bool credit) {
-    this->name = name;
-    this->age = age;
-    this->buyOfCar = buyOfCar;
-    this->credit = credit;
-};
-
-
 
 #endif

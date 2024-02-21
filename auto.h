@@ -1,6 +1,8 @@
 #ifndef LAB_2_AUTO_H
 #define LAB_2_AUTO_H
 #include <iostream>
+#include <string>
+
 using namespace std;
 
 class Auto{
@@ -11,7 +13,18 @@ private:
 public:
 
     Auto(){};
-    Auto(string name, int age, bool typeOfFuel, bool availability);
+    Auto(string name){
+        this->name = name;
+    };
+    Auto(string name, int age) : Auto(name){
+        this->age = age;
+    };
+    Auto(string name, int age, bool typeOfFuel) : Auto(name,age){
+        this->typeOfFuel = typeOfFuel;
+    };
+    Auto(string name, int age, bool typeOfFuel, bool availability) : Auto(name,age,typeOfFuel){
+        this->availability = availability;
+    };
     string ShowOfAuto() {
         string str;
 
@@ -23,6 +36,9 @@ public:
                 break;
             case 1:
                 str = str + "Type of fuel: Gas" + "\t";
+                break;
+            case 2:
+                str = str + "Type of fuel: Petrol" + "\t";
                 break;
         }
 
@@ -51,11 +67,5 @@ public:
     }
 };
 
-Auto::Auto(string name, int age, bool typeOfFuel, bool availability) {
-    this->name = name;
-    this->age = age;
-    this->typeOfFuel = typeOfFuel;
-    this->availability = availability;
-};
 
 #endif
