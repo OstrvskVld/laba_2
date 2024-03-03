@@ -32,7 +32,8 @@ public:
         this->dataOfBirth = dataOfBirth;
         this->salary = salary;
     }
-    Personal(string name, string placeOfBirth, double dataOfBirth, double salary, bool femaleMale);
+
+     Personal(string name, string placeOfBirth, double dataOfBirth, double salary, bool femaleMale);
     string person (){
         string str;
         str = "Name: " + name + "\t" "Place of birth:" + "\t" + placeOfBirth + "\t" + "Data of birth: " + to_string(dataOfBirth)
@@ -57,11 +58,21 @@ public:
         this->femaleMale = femaleMale;
     }
 
+
+    // Shallow copy
+    Personal(const Personal& other)
+            : name(other.name), dataOfBirth(other.dataOfBirth), placeOfBirth(other.placeOfBirth),
+            salary(other.salary), femaleMale(other.femaleMale)
+    {
+        cout << "Shallow copy constructor is called" << endl;
+    }
+
     ~Personal(){
         cout << "Destructor is here." << endl;
     }
 };
-Personal::Personal(string name, string placeOfBirth, double dataOfBirth, double salary, bool femaleMale) {
+
+     Personal::Personal(string name, string placeOfBirth, double dataOfBirth, double salary, bool femaleMale) {
     this-> name = name;
     this->dataOfBirth = dataOfBirth;
     this->placeOfBirth = placeOfBirth;

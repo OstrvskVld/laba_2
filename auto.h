@@ -8,8 +8,8 @@ using namespace std;
 class Auto{
 private:
     string name;
-    int age;
-    bool typeOfFuel, availability;
+    int age, typeOfFuel;
+    bool availability;
 public:
 
     Auto(){};
@@ -25,7 +25,7 @@ public:
     Auto(string name, int age, bool typeOfFuel, bool availability) : Auto(name,age,typeOfFuel){
         this->availability = availability;
     };
-    string ShowOfAuto() {
+    string ShowOfAuto() const {
         string str;
 
         str = "Name: " + name + "\t" + "Age: " + to_string(age) + "\t";
@@ -39,6 +39,10 @@ public:
                 break;
             case 2:
                 str = str + "Type of fuel: Petrol" + "\t";
+                break;
+
+            case 3:
+                str = str + "Type of fuel: None" + "\t";
                 break;
         }
 
@@ -62,6 +66,17 @@ public:
             this -> typeOfFuel = typeOfFuel;
             this -> availability = availability;
         }
+        //Move constructor
+        Auto(Auto&& other) :name(other.name), age(other.age), typeOfFuel(other.typeOfFuel),
+        availability(other.availability){
+        other.name = "";
+        other.age = 0;
+        other.availability = 1;
+        other.typeOfFuel = 3;
+
+        cout << "Move constructor is called" << endl;
+    }
+
     ~Auto() {
         cout << "Destructor is here." << endl;
     }

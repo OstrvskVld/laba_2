@@ -6,4 +6,5 @@ set(CMAKE_CXX_STANDARD 23)
 add_executable(lab_2 main.cpp
         auto.h
         clients.h
-        personal.h)
+        personal.h
+        clients.cpp)

@@ -13,47 +13,46 @@ private:
     bool credit;
     string carmake;
 
+    // Static field (belongs to the class)
+    static int clients;
 public:
-    Clients() : name(""), age(0), buyOfCar(false), credit(false), carmake("") {}
-    Clients(string name, int age, bool buyOfCar, bool credit, string carMake) {
-        this->name = name;
-        this->age = age;
-        this->buyOfCar = buyOfCar;
-        this->credit = credit;
-        this->carmake = carmake;
+    Clients();
+    Clients(int age);
+    Clients(string name, int age, bool buyOfCar, bool credit, string carMake);
+
+    string carsMake();
+    void init(string name, int age, bool buyOfCar, bool credit, string carMake);
+
+    static int countOfClients() { return clients; };
+
+    // Deep copy from header
+    Clients(const Clients& other);
+
+    // Overloading the "+" operator (unary)
+    Clients operator + () const
+    {
+        return Clients (age + 1);
     }
 
-    string carMake() {
-        string str = "Name: " + name + "\t" + "Age: " + to_string(age) + "\t";
-
-        if (buyOfCar) {
-            str += "Car purchased: ";
-            if (carmake.empty()) {
-                cout << "Enter car make: ";
-                getline(cin, carmake);
-            }
-            str += carmake + "\t";
-        } else {
-            str += "No car purchased\t";
-        }
-
-        str += "Credit: ";
-        str += credit ? "Yes" : "No";
-
-        return str;
+    // Overloading the "+" operator (binary)
+    Clients operator + (const Clients& other) const
+    {
+        return Clients (age + other.age);
     }
 
-    void init(string name, int age, bool buyOfCar, bool credit, string carMake) {
-        this->name = name;
-        this->age = age;
-        this->buyOfCar = buyOfCar;
-        this->credit = credit;
-        this->carmake = carmake;
-    }
+    string showUnary() const { return "Age: " + to_string(age); };
+    string showBinary() const { return "Age: " + to_string(age); };
 
-    ~Clients() {
-        cout << "Destructor is here." << endl;
-    }
+    friend istream &operator >> (istream &is, Clients &obj)
+    {
+        return is >> obj.name >> obj.age >> obj.buyOfCar >> obj.credit >> obj.carmake;
+    };
+    friend ostream &operator << (ostream &os, Clients &obj)
+    {
+        return os << obj.name << endl << obj.age << endl << obj.buyOfCar << endl << obj.credit << endl << obj.carmake;
+    };
+
+    ~Clients();
 };
 
 #endif
